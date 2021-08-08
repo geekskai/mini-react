@@ -121,11 +121,13 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
-  if (!fiber.dom) {
-    fiber.dom = createDom(fiber);
-  }
-  const elements = fiber.props.children;
-  reconcileChildren(fiber, elements);
+  // if (!fiber.dom) {
+  //   fiber.dom = createDom(fiber);
+  // }
+  // const elements = fiber.props.children;
+  // reconcileChildren(fiber, elements);
+
+  const isFunctionComponent = fiber.type instanceof Function;
 
   if (fiber.child) {
     return fiber.child;
@@ -185,10 +187,35 @@ function reconcileChildren(wipFiber, elements) {
   }
 }
 
+// function render(element, container) {
+//   const dom =
+//     element.type === "TEXT_ELEMENT"
+//       ? document.createTextNode("")
+//       : document.createElement(element.type);
+
+//   const isProperty = (key) => key !== "children";
+//   Object.keys(element.props)
+//     .filter(isProperty)
+//     .forEach((name) => {
+//       dom[name] = element.props[name];
+//     });
+
+//   element.props.children.forEach((child) => render(child, dom));
+//   container.appendChild(dom);
+// }
+
 const Geeks = {
   createElement,
   render,
 };
+
+// const element = (
+//   <div style="background:red">
+//     <h1>Hello World</h1>
+//     <button style="color:blue">click</button>
+//     <span style="text-align:right">from gan</span>
+//   </div>
+// );
 
 const updateValue = (e) => {
   reRender(e.target.value);
@@ -207,4 +234,5 @@ const reRender = (value) => {
   Geeks.render(element, container);
 };
 
+// Geeks.render(element, container);
 reRender("World");
