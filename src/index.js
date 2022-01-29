@@ -12,7 +12,7 @@ const stories = [
 class App extends Gankai.Component {
   render() {
     return (
-      <div id="666">
+      <div>
         <h1>Gankai Stories</h1>
         <ul>
           {this.props.stories.map((story) => {
